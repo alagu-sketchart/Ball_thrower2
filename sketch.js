@@ -1,32 +1,45 @@
 const Engine = Matter.Engine;
+const World= Matter.World;
 const Bodies = Matter.Bodies;
-const World = Matter.World;
 
-var world, engine;
+var engine, world;
+var ground, ball;
+var binImage,bin;
 
-var car1, car2, car3, wall;
-var speed, weight;
-function setup() {
-  createCanvas(1500,400);
-  
-  car1= createSprite(200, 75, 80, 40);
-  car2= createSprite(200, 175, 80, 40);
-  car3= createSprite(200, 275, 80, 40);
-  speed=random(55,90);
-  weight=random(400,1500);
-  wall=createSprite(1500,200,50,height);
+function preload(){
+    binImage = loadImage("Images/dustbingreen.png");
+}
+function setup(){
+    createCanvas(1000,600);
+    engine = Engine.create();
+    world = engine.world;
 
-  
+    bin = createSprite(810,485,20,20);
+    bin.addImage(binImage);
+    bin.scale = 0.6;
 
+    ground = new Ground();
+    ball = new Ball();
+    box1 = new Box(752,505,10,120);
+    box2 = new Box(812,565,130,10);
+    box3 = new Box(874,505,10,120);
 }
 
-function draw() {
-  background(125,255,125); 
-  
-  car1.velocityX = speed;
-  car2.velocityX = speed;
-  car3.velocityX = speed;
-  
+function draw(){
+    background(0);
+    Engine.update(engine);
 
-  drawSprites();
+    ground.display();
+    ball.display();
+    box1.display();
+    box2.display();
+    box3.display(); 
+      
+    drawSprites();
+}
+
+function keyPressed(){
+    if(keyCode === UP_ARROW){
+        Matter.Body.applyForce(ball.body,ball.body.position,{x:64,y:-65});
+    }
 }
