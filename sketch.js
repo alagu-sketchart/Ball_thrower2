@@ -7,7 +7,7 @@ var ground, ball;
 var binImage,bin;
 
 function preload(){
-    binImage = loadImage("Images/dustbingreen.png");
+    binImage = loadImage("dustbingreen.png");
 }
 function setup(){
     createCanvas(1000,600);
@@ -40,6 +40,6 @@ function draw(){
 
 function keyPressed(){
     if(keyCode === UP_ARROW){
-        Matter.Body.applyForce(ball.body,ball.body.position,{x:64,y:-65});
+        Matter.Body.applyForce(ball.body,ball.body.position,{x:67,y:-67});
     }
 }
